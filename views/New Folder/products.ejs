@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>PESTICIDE SUPPLY SYSTEM</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tms-0.4.1.js"></script>
+<script src="js/slider.js"></script>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .prode{
+    background-color: yellow;
+    margin-left: 9px;
+    margin-bottom: 9px;
+    border: 2px white solid;
+  }
+  .product{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+</style>
+
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<link rel="stylesheet" href="css/ie.css"> 
+<![endif]-->
+</head>
+<body>
+<div class="main-bg">
+  <!-- Header -->
+  <header>
+    <div class="inner">
+      <h1 class="logo"><a href="images/pesticide logo.jpg">PESTICIDE SUPPLY SYSTEM - Agriculture company</a></h1>
+      <nav>
+        <ul class="sf-menu">
+          <li><a href="/home">home</a></li>
+          <li class="current"><a href="/products">products</a></li>
+          <li><a href="/pricing">pricing</a></li>
+          <li><a href="/contacts">contacts</a></li>
+          <li><a href="/reviews">reviews</a></li>
+          <button><li> <a href="/"> LOG OUT</a></li></button> 
+        </ul>
+      </nav>
+      <div class="clear"></div>
+    </div>
+  </header>
+  <!-- Content -->
+  <section id="content">
+    <div class="container_24">
+      <div class="wrapper">
+        <div class="grid_24 content-bg">
+          <div class="wrapper">
+            <article class="grid_22 suffix_1 prefix_1 alpha omega">
+              <h2>Our products: </h2>
+              <div class="wrapper">
+                 <input type="text" placeholder="Search for..." id="searchinput"><button type="button" id="searchbutton">Search</button>
+              </div>
+              <div id="product">
+              
+               
+                <% if (products && products.length > 0) { %>
+                  <div id="productListContainer">
+         
+                    <div class="product">
+
+                      <% products.forEach(function(product) { %>
+                     <div class="prode">
+                      <div><%= product.productName %>: <%= product.product %></div>
+                      <div><%= product.productName %>: <%= product.price %></div>
+                      <div><%= product.productName %>: <%= product.dosage %></div>
+                      <div><%= product.productName %>: <%= product.description %></div>
+                      <div><%= product.productName %>: <%= product.target %></div>
+                      <div><%= product.productName %>: <%= product.image %>   
+                   
+                     </div>     
+                        <% }); %>
+                    </div>
+                    
+                    </div>
+                  <% } else { %>
+                    <p>No products available</p>
+                  <% } %></div>
+                    
+              </div>
+                  
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const searchInput = document.getElementById('searchinput');
+    const searchButton = document.getElementById('searchbutton');
+    const productList = document.querySelectorAll('#productListContainer li');
+
+    searchButton.addEventListener('click', function(){
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        productList.forEach(function(product){
+            const productName = product.textContent.toLowerCase();
+
+            if (productName.includes(searchTerm)){
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+
+        searchInput.value = '';
+    });
+});
+
+</script>
+</body>
+</html>
